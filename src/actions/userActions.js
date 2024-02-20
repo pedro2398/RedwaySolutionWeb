@@ -21,7 +21,7 @@ export async function saveUser(data) {
     revalidatePath("/")
 }
 
-export async function getEmail() {
+export async function getUser() {
     const response = await fetch(url,{next: {revalidate: 0}});
 
     if(response.status != 200) {

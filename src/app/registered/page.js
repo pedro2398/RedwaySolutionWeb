@@ -7,7 +7,7 @@ export default function Registered() {
             <p>Thank you for responding to our form</p>
             <div className="space-x-2">
                 <Button href={ "/" } text={ "home" }/>
-                <Button href={ "/emails" } text={"emails"}/>
+                <Button href={ "/users" } text={"users"}/>
             </div>
         </main>
     );
