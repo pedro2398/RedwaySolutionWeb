@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
-const url = "http://localhost:8080/user";
+const url = `${process.env.NEXT_PUBLIC_URL}/user`;
 
 export async function saveUser(data) {
     
@@ -18,15 +18,20 @@ export async function saveUser(data) {
 
     if (response.status !== 201) return { error : "error when registering"};
 
-    revalidatePath("/")
+    revalidatePath("/user")
 }
 
 export async function getUser() {
-    const response = await fetch(url,{next: {revalidate: 0}});
+    try {
+        const response = await fetch(url,{next: {revalidate: 0}});
 
-    if(response.status != 200) {
-        return {error: "error when find emails"}
-    }
+        if(response.status != 200) {
+            return {error: "error when find users"}
+        }
 
-    return await response.json();
+        return await response.json();
+    } catch (error) {
+         console.log(error);
+         return []
+     }
 }
